@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import './register_page.dart';
+import './login_page.dart';
 import './widgets/heading_auth.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   double _deviceWidth;
   double _deviceHeigh;
 
   @override
   Widget build(BuildContext context) {
-    
+
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeigh = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
@@ -26,9 +26,9 @@ class LoginScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.10),
       child: Column(
         children: <Widget>[
-           Container(height: 50),
-           HeadingAuth(),
-           Container(height: 20),
+          Container(height: 50),
+          HeadingAuth(),
+          Container(height: 20),
           _formLogin(context),
           Container(height: 20),
           _loginButton(context),
@@ -43,21 +43,47 @@ class LoginScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(143, 148, 251, .6),
-            blurRadius: 20.0,
-            offset: Offset(0, 10)
-          )
-        ]
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(143, 148, 251, .6),
+                blurRadius: 20.0,
+                offset: Offset(0, 10)
+            )
+          ]
       ),
       child: Column(
         children: <Widget>[
+          _nameTextField(context),
           _emailTextField(context),
           _passwordTextField(context)
         ],
+      ),
+    );
+  }
+
+  Widget _nameTextField(context){
+    return TextFormField(
+      autocorrect: false,
+      autofocus: true,
+      style: TextStyle(
+          color: Theme.of(context).primaryColor
+      ),
+      cursorColor: Theme.of(context).primaryColor,
+      decoration: InputDecoration(
+          border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          contentPadding: EdgeInsets.all(10),
+          hintText: 'Nome',
+          hintStyle: TextStyle(color: Theme.of(context).primaryColor)
       ),
     );
   }
@@ -67,22 +93,22 @@ class LoginScreen extends StatelessWidget {
       autocorrect: false,
       autofocus: false,
       style: TextStyle(
-        color: Theme.of(context).primaryColor
+          color: Theme.of(context).primaryColor
       ),
       cursorColor: Theme.of(context).primaryColor,
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).primaryColor)
-        ),
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).primaryColor)
-        ),
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).primaryColor)
-        ),
-        contentPadding: EdgeInsets.all(10),
-        hintText: 'E-mail',
-        hintStyle: TextStyle(color: Theme.of(context).primaryColor)
+          border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor)
+          ),
+          contentPadding: EdgeInsets.all(10),
+          hintText: 'E-mail',
+          hintStyle: TextStyle(color: Theme.of(context).primaryColor)
       ),
     );
   }
@@ -117,13 +143,13 @@ class LoginScreen extends StatelessWidget {
       child: MaterialButton(
         padding: EdgeInsets.all(15),
         onPressed: (){
-          print('login...');
+          print('registrando...');
           Navigator.pushReplacementNamed(context, '/restaurants');
         },
         color: Theme.of(context).primaryColor,
-        child: Text('LOGIN'),
+        child: Text('CADASTRAR'),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15)
+            borderRadius: BorderRadius.circular(15)
         ),
       ),
     );
@@ -131,22 +157,22 @@ class LoginScreen extends StatelessWidget {
 
   Widget _textRegister(context){
     return GestureDetector(
-      onTap: (){
-//       Navigator.of(context).pushReplacement(
-//         MaterialPageRoute(builder: (context) => RegisterScreen())
-//       );
-        Navigator.pushReplacementNamed(context, '/register');
-      },
-       child: Container(
-         child: Text(
-             'Cadastrar-se',
-             style: TextStyle(
-                 color: Theme.of(context).primaryColor,
-                 fontSize: 18.2
-             )
-         ),
-         padding: EdgeInsets.all(50),
-       )
+        onTap: (){
+//          Navigator.of(context).pushReplacement(
+//              MaterialPageRoute(builder: (context) => LoginScreen())
+//          );
+          Navigator.pushReplacementNamed(context, '/login');
+        },
+        child: Container(
+          child: Text(
+              'Já tem cadastro? Faça login!',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 15.2
+              )
+          ),
+          padding: EdgeInsets.all(30),
+        )
     );
   }
 }
