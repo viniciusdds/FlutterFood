@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/Restaurant.dart';
 import './widgets/RestaurantCard.dart';
+import '../../widgets/flutter_bottom_navigator.dart';
 
 class RestaurantsPage extends StatefulWidget {
   @override
@@ -44,6 +45,7 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: _buildRestaurants(context),
+      bottomNavigationBar: FlutterFoodBottomNavigator(0),
     );
   }
 

@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   cached_network_image: ^2.2.0+1
   flutter_cache_manager: ^1.4.1
+  curved_navigation_bar: ^0.3.3
 
 dev_dependencies:
   flutter_test:
