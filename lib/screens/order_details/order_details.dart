@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../widgets/flutter_bottom_navigator.dart';
 import '../../models/Order.dart';
@@ -29,7 +30,18 @@ class OrderDetailsScreen extends StatelessWidget {
             price: '15.2',
             title: 'Açaí'),
     ],
-    evaluations: [],
+    evaluations: [
+      Evaluation(
+        comment: 'Pedido muito bom',
+        nameUser: 'Vinicius',
+        stars: 4,
+      ),
+      Evaluation(
+        comment: 'Pedido excelente',
+        nameUser: 'Vinicius',
+        stars: 5,
+      ),
+    ],
   );
 
   @override
@@ -62,6 +74,15 @@ class OrderDetailsScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold)
           ),
           _buildFoodsOrder(context),
+          Container(height: 30),
+          Text('Avaliações:',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          _buildEvaluationsOrder(),
         ],
       ),
     );
@@ -86,21 +107,76 @@ class OrderDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildFoodsOrder(context){
-    return ListView.builder(
-        shrinkWrap: true,
-          itemCount: _order.foods.length,
-          itemBuilder: (context, index){
-            final Food food = _order.foods[index];
+    return Container(
+      padding: EdgeInsets.only(left: 10),
+      child: ListView.builder(
+          shrinkWrap: true,
+            itemCount: _order.foods.length,
+            itemBuilder: (context, index){
+              final Food food = _order.foods[index];
+              return FoodCard(
+                identify: food.identify,
+                description: food.description,
+                image: food.image,
+                price: food.price,
+                title: food.title,
+                notShowIconCart: true,
+              );
+            }
+        ),
+    );
+  }
 
-            return FoodCard(
-              identify: food.identify,
-              description: food.description,
-              image: food.image,
-              price: food.price,
-              title: food.title,
-              notShowIconCart: true,
-            );
-          }
-      );
+  Widget _buildEvaluationsOrder(){
+    return Container(
+      padding: EdgeInsets.only(left: 10),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: _order.evaluations.length,
+        itemBuilder:(context, index) {
+          final Evaluation evaluation = _order.evaluations[index];
+          return _buildEvaluationItem(evaluation, context);
+        }
+      ),
+    );
+  }
+
+  Widget _buildEvaluationItem(Evaluation evaluation, context){
+    return Card(
+      elevation: 2.5,
+      child: Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          border: Border.all(color: Colors.grey[100]),
+          borderRadius: BorderRadius.all(Radius.circular(4))
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            RatingBar(
+              initialRating: evaluation.stars,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemSize: 30,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) =>
+                  Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+              onRatingUpdate: null,
+            ),
+            Row(
+              children: <Widget>[
+                Text("${evaluation.nameUser} - ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                Text(evaluation.comment, style: TextStyle(color: Colors.black))
+              ],
+            )          ],
+        ),
+      ),
+    );
   }
 }
