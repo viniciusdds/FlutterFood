@@ -31,16 +31,16 @@ class OrderDetailsScreen extends StatelessWidget {
             title: 'Açaí'),
     ],
     evaluations: [
-      Evaluation(
-        comment: 'Pedido muito bom',
-        nameUser: 'Vinicius',
-        stars: 4,
-      ),
-      Evaluation(
-        comment: 'Pedido excelente',
-        nameUser: 'Vinicius',
-        stars: 5,
-      ),
+//      Evaluation(
+//        comment: 'Pedido muito bom',
+//        nameUser: 'Vinicius',
+//        stars: 4,
+//      ),
+//      Evaluation(
+//        comment: 'Pedido excelente',
+//        nameUser: 'Vinicius',
+//        stars: 5,
+//      ),
     ],
   );
 
@@ -82,7 +82,7 @@ class OrderDetailsScreen extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
           ),
-          _buildEvaluationsOrder(),
+          _buildEvaluationsOrder(context),
         ],
       ),
     );
@@ -127,8 +127,8 @@ class OrderDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEvaluationsOrder(){
-    return Container(
+  Widget _buildEvaluationsOrder(context){
+    return _order.evaluations.length > 0 ? Container(
       padding: EdgeInsets.only(left: 10),
       child: ListView.builder(
         shrinkWrap: true,
@@ -137,6 +137,21 @@ class OrderDetailsScreen extends StatelessWidget {
           final Evaluation evaluation = _order.evaluations[index];
           return _buildEvaluationItem(evaluation, context);
         }
+      ),
+    ) : Container(
+      height: 40,
+      margin: EdgeInsets.only(bottom: 30, top: 10),
+      child: RaisedButton(
+        onPressed: (){
+          Navigator.pushNamed(context, '/evaluation-order');
+        },
+        color: Colors.orange,
+        elevation: 2.2,
+        child: Text('Avaliar o Pedido'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: BorderSide(color: Colors.orangeAccent)
+        ),
       ),
     );
   }

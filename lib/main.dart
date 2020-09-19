@@ -7,6 +7,8 @@ import './screens/foods/foods_page.dart';
 import './screens/carts/cart_page.dart';
 import './screens/orders/orders_page.dart';
 import './screens/order_details/order_details.dart';
+import './screens/evaluation_order/evaluation_order.dart';
+import './screens/profile/profile_page.dart';
 
 void main() => runApp(FlutterFoodApp());
 
@@ -31,6 +33,8 @@ class FlutterFoodApp extends StatelessWidget {
         '/cart': (context) => CartScreen(),
         '/my-orders': (context) => OrdersScreen(),
         '/order-details': (context) => OrderDetailsScreen(),
+        '/evaluation-order': (context) => EvaluationOrderScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
     );
   }
