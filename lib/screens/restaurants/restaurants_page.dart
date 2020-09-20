@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../models/Restaurant.dart';
 import './widgets/RestaurantCard.dart';
@@ -34,6 +35,8 @@ class _RestaurantsPageState extends State<RestaurantsPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
