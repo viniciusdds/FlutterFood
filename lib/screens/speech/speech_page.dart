@@ -47,7 +47,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   }
 
   Future<String> _checkAuth() async{
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 5));
 
     return '';
   }
