@@ -10,24 +10,22 @@ class DioClient {
     _dio =  dioInterceptor();
   }
 
-  Future<dynamic> get(String url, Map<String, dynamic> queryParameters) async{
+  Future<dynamic> get(String url, {Map<String, dynamic> queryParameters}) async{
+    //print(url);
     try{
       final Response response = await _dio.get(url, queryParameters: queryParameters);
-      print(response);
 
-    }catch(e){
-      print(e.toString());
+    }on DioError catch(e){
+
       throw e;
     }
   }
 
-  Future<dynamic> post(String url, formData, Map<String, dynamic> queryParameters) async{
+  Future<dynamic> post(String url, {formData, Map<String, dynamic> queryParameters}) async{
     try{
       final Response response = await _dio.post(url, data: formData, queryParameters: queryParameters);
-      print(response);
 
     }catch(e){
-      print(e.toString());
       throw e;
     }
   }
